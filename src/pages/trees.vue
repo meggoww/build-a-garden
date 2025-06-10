@@ -43,11 +43,6 @@ const listOfTrees = ref([
   }
 ])
 
-const selectedTree = ref('None');
-
-function setCurrTreeSelected(name) {
-  selectedTree.value = name
-}
 </script>
 
 <template>
@@ -57,12 +52,11 @@ function setCurrTreeSelected(name) {
     </v-app-bar>
   </v-card>
 
-  <h4> Selected Tree: {{ selectedTree }} </h4>
-
   <div class="menu">
     <v-card v-for="tree in listOfTrees" :key="tree.name" class="mx-auto" max-width="344" variant="tonal">
       <v-img :src="tree.imgSrc" max-height="300" cover />
       <v-card-title>{{ tree.name }}</v-card-title>
+      <v-card-subtitle>Price: ${{ tree.price.toFixed(2) }}</v-card-subtitle>
       <v-card-text max-height="300">{{ tree.description }}</v-card-text>
       <v-card-actions>
         <v-list-item class="w-100">

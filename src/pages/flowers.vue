@@ -41,13 +41,7 @@ const listOfFlowers = ref([
     imgSrc: 'https://i.pinimg.com/736x/47/2c/ab/472cab7a673524d7287e6c618503c134.jpg',
     price: 2.49
   }
-])
-
-const selectedFlower = ref('None');
-
-function setCurrFlowerSelected(name) {
-  selectedFlower.value = name
-}
+]);
 
 </script>
 
@@ -58,12 +52,11 @@ function setCurrFlowerSelected(name) {
     </v-app-bar>
   </v-card>
 
-  <h4> Selected Flower: {{ selectedFlower }} </h4>
-
   <div class="menu">
     <v-card v-for="flower in listOfFlowers" :key="flower.name" class="mx-auto" max-width="344" variant="tonal">
       <v-img :src="flower.imgSrc" max-height="300" cover />
       <v-card-title>{{ flower.name }}</v-card-title>
+      <v-card-subtitle>Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
       <v-card-text max-height="300">{{ flower.description }}</v-card-text>
       <v-card-actions>
         <v-list-item class="w-100">
