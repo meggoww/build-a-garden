@@ -2,9 +2,10 @@
 
 A simple website for building your own garden from flowers and plants that you choose
 
-### Prerequeisites
+### Prerequisites
 
 - yarn
+- Setup Postgres local database. Follow the instructions in [docs/db-setup.md](docs/db-setup.md).
 
 ### 💿 Install
 
