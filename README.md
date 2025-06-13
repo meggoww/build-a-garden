@@ -2,12 +2,13 @@
 
 A simple website for building your own garden from flowers and plants that you choose
 
-### Prerequisites
+## Getting Started
 
-- yarn
-- Setup Postgres local database. Follow the instructions in [docs/db-setup.md](docs/db-setup.md).
+### Install Prerequisites
 
-### 💿 Install
+- Check out the [prerequisites](./docs/prerequisites.md) to set up your development environment.
+
+### Install project dependencies
 
 Run this command
 
@@ -15,7 +16,9 @@ Run this command
 yarn install
 ```
 
-### Starting the Development Server
+### Start the Development Server
+
+#### Frontend
 
 To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
 
@@ -23,7 +26,15 @@ To start the development server with hot-reload, run the following command. The 
 yarn dev
 ```
 
-### Building for Production
+#### Backend
+
+To start the backend server, run the following command. The server will be accessible at [http://localhost:8000](http://localhost:8000):
+
+```bash
+yarn start-server
+```
+
+## Building for Production
 
 To build your project for production, use:
 
