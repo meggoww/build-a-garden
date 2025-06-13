@@ -24,5 +24,13 @@
 </template>
 
 <script setup>
-//
+
+import { onMounted } from 'vue';
+import { useProductsStore } from '@/stores/products';
+
+const productsStore = useProductsStore();
+onMounted(async () => {
+  await productsStore.fetchProducts();
+  console.log('Products fetched:', productsStore.getAllProducts);
+});
 </script>
