@@ -2,7 +2,7 @@
   <v-app>
     <v-navigation-drawer expand-on-hover rail>
       <v-list>
-        <v-list-item to="/cart" prepend-icon="mdi-cart" subtitle="View items" title="My Cart"></v-list-item>
+        <v-list-item prepend-icon="mdi-cart" subtitle="View items" title="My Cart"></v-list-item>
       </v-list>
       <v-divider></v-divider>
       <v-list density="compact" nav>
