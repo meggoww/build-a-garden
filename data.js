@@ -80,3 +80,19 @@ export const products = [
     category: 'tree'
   }
 ];
+
+export const discounts = [
+  {
+    id: "1",
+    name: 'Spring Sale',
+    product_id: 1,
+    discount_percentage: 20,
+
+  },
+  {
+    id: "2",
+    name: 'Tree Planting Month',
+    discount_percentage: 15,
+    product_id: 6,
+  },
+]

@@ -1,7 +1,9 @@
 <script setup>
 // TODO: add imports
 
-// TODO: create functions needed
+// TODO: implement the getDiscountedPrice function. If there is no discount, return the original price.
+
+// TODO: implement getGrandTotal computed function
 
 </script>
 

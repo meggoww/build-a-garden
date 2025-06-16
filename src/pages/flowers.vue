@@ -9,44 +9,17 @@ const { addItem } = cartStore
 
 const listOfFlowers = productsStore.getAllFlowerProducts;
 
+const hasDiscount = (productId) => {
+  const discount = productsStore.discounts.find(discount => discount.product_id === productId);
+  return discount ? true : false;
+}
 
-// const listOfFlowers = ref([
-//   {
-//     id: "flowers-1",
-//     name: 'Sunflower',
-//     description: 'Sunflowers are known for their large, bright yellow petals and tall stems. They symbolize loyalty and adoration.',
-//     image: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower_sky_backdrop.jpg',
-//     price: 2.99
-//   },
-//   {
-//     id: "flowers-2",
-//     name: 'Rose',
-//     description: 'Roses are classic flowers that come in various colors, each symbolizing different emotions—red for love and passion, white for purity, and yellow for friendship.',
-//     image: 'https://img.freepik.com/free-photo/closeup-shot-red-rose-with-dew-top-black_181624-28079.jpg?semt=ais_items_boosted&w=740',
-//     price: 3.49
-//   },
-//   {
-//     id: "flowers-3",
-//     name: 'Lily',
-//     description: 'Lilies are elegant flowers often associated with purity and refined beauty. They come in various types, including Easter lilies and tiger lilies.',
-//     image: 'https://www.dutchgrown.com/cdn/shop/products/LilyStarGazer.jpg?v=1668676765',
-//     price: 4.99
-//   },
-//   {
-//     id: "flowers-4",
-//     name: 'Lavender',
-//     description: 'Lavender is renowned for its calming fragrance and purple flowers. It symbolizes tranquility and grace.',
-//     image: 'https://fairweathers.co.uk/wp-content/uploads/2015/02/a.-Havana-RL0746-scaled.jpg',
-//     price: 1.99
-//   },
-//   {
-//     id: "flowers-5",
-//     name: 'Gumamela',
-//     description: 'Gumamela, commonly known as hibiscus, features large, colorful blooms that thrive in tropical climates. They often symbolize delicate beauty and fragility.',
-//     image: 'https://i.pinimg.com/736x/47/2c/ab/472cab7a673524d7287e6c618503c134.jpg',
-//     price: 2.49
-//   }
-// ]);
+
+const calculatePriceWithDiscount = (price, discountPercentage) => {
+  const discountedPrice = price - (price * (discountPercentage / 100));
+  return discountedPrice.toFixed(2);
+}
+
 
 </script>
 
@@ -61,7 +34,12 @@ const listOfFlowers = productsStore.getAllFlowerProducts;
     <v-card v-for="flower in listOfFlowers" :key="flower.name" class="mx-auto" max-width="344" variant="tonal">
       <v-img :src="flower.image" max-height="300" cover />
       <v-card-title>{{ flower.name }}</v-card-title>
-      <v-card-subtitle>Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
+      <div v-if="hasDiscount(flower.id)">
+        <v-card-subtitle class="text-decoration-line-through">Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
+        <v-card-subtitle v-if="hasDiscount(flower.id)">Price: ${{ calculatePriceWithDiscount(flower.price,
+          productsStore.getProductDiscount(flower.id)) }}</v-card-subtitle>
+      </div>
+      <v-card-subtitle v-else>Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
       <v-card-text max-height="300">{{ flower.description }}</v-card-text>
       <v-card-actions>
         <v-list-item class="w-100">

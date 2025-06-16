@@ -6,7 +6,7 @@ The goal of this lab exercise is to practice what you've learned about Vue.
 
 It should:
 
-1. Display all of the items including an item's name, image, price, and quantity.
+1. Display all of the items including an item's name, image, price (discounted price if applicable), and quantity.
 2. Display the total for each line item
 3. Display the grand total at the bottom of the list
 4. Have a button that when clicked, will remove the item from the cart
