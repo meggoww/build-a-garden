@@ -1,5 +1,7 @@
 ## Local Development Setup
 
+Before starting the labs, you need to set up your local development environment. Follow these steps to get everything running:
+
 1. Clone this repository
 2. Open the project in VSCode​
 3. Create a .env file at the root of the project containing the connection string to your database​. If you haven't setup the database yet, follow the instructions in the [Database Setup Instructions](../../docs/db-setup.md) document.
