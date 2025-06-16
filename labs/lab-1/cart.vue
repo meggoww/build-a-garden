@@ -1,5 +1,6 @@
 <script setup>
-// TODO: add imports
+import { useProductsStore } from '@/stores/products';
+import { useCartStore } from '@/stores/cart';
 
 // TODO: implement the getDiscountedPrice function. If there is no discount, return the original price.
 
