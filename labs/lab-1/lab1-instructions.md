@@ -5,7 +5,7 @@ The goal of this lab exercise is to practice what you've learned about Vue.
 ## Prerequisites
 
 1. If you haven't done so, go through [Local Development Setup](../local-dev-setup.md)
-2. Create a new branch and name it `lab-1/<your-group-name>/cart-page`​. In VS Code, you can do this by opening the terminal and running:
+2. Create a new branch and name it `lab-1/<your-group-name>/cart-page`​. In VS Code, you can do this by opening a Git Bash terminal and running:
    ```bash
    git checkout -b lab-1/<your-group-name>/cart-page
    ```

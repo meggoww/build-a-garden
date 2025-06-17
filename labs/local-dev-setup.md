@@ -8,7 +8,7 @@ Before starting the labs, you need to set up your local development environment.
 
    DATABASE_URL=postgres://your_db_username:your_db_password@localhost:5432/your_db​
 
-4. Open the terminal in VSCode and run the following commands:​
+4. Open a Git Bash terminal in VSCode and run the following commands:​
 
 To install project dependencies​
 
@@ -23,8 +23,6 @@ yarn dev
 ```
 
 To start the backend server​
-
-Open a new terminal in VSCode and run the following command:
 
 ```bash
 yarn start-server

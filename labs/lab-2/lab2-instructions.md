@@ -6,13 +6,13 @@ The goal of this lab exercise is to practice what you've learned about Postgres,
 
 1. If you haven't done so, go through [Local Development Setup](../local-dev-setup.md)
 2. Lab 1 must be completed before starting this lab.
-3. Checkout 'lab-1/<your-group-name>/cart-page' branch in your local repository. If you are not on that branch, run the following command in the terminal:
+3. Checkout 'lab-1/<your-group-name>/cart-page' branch in your local repository. If you are not on that branch, run the following command in a Git Bash terminal in VSCode:
    ```bash
    git checkout lab-1/<your-group-name>/cart-page
    ```
-4. Create a new branch and name it `lab-1/<your-group-name>/discounts`​. In VS Code, you can do this by opening the terminal and running:
+4. Create a new branch and name it `lab-2/<your-group-name>/discounts`
    ```bash
-   git checkout -b lab-1/<your-group-name>/discounts
+   git checkout -b lab-2/<your-group-name>/discounts
    ```
 
 ## Objective: Add a feature to the website for product discounts.

@@ -6,7 +6,7 @@
 
 ### Git
 
-- Install [Git for Windows](https://git-scm.com/downloads/win). Or if you use Git Bash, that's fine too.
+- Install [Git for Windows](https://git-scm.com/downloads/win). Make sure to include Git Bash in the installation options.
 
 ### Vue Dev Tools Chrome Extension
 
@@ -17,7 +17,7 @@
 - Go to the NVM for Windows [Releases page](https://github.com/coreybutler/nvm-windows/releases)
 - Install the latest version of `nvm-setup.exe`
 - Run the installer and follow the instructions
-- Open "Command Prompt" or "Terminal" in your machine and run the following command to install the latest version of Node.js:
+- Open "Git Bash" in your machine and run the following command to install the latest version of Node.js:
 
   ```bash
   nvm install latest
@@ -36,7 +36,7 @@
 
 ### Install yarn using npm
 
-- Open "Command Prompt" or "Terminal" in your machine and run the following command to install Yarn globally:
+- Open "Git Bash" in your machine and run the following command to install Yarn globally:
 
   ```bash
   npm install -g yarn
