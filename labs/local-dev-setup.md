@@ -22,10 +22,12 @@ To start the frontend server​
 yarn dev
 ```
 
-To start the backend server​
+In a separate Git Bash terminal in VSCode, run the following command to start the backend server:
 
 ```bash
 yarn start-server
 ```
+
+You can create a new terminal in VSCode by clicking on the "+" icon in the terminal panel or by using the shortcut Ctrl + Shift + \` (backtick).
 
 5. Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to view the application.

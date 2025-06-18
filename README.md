@@ -28,11 +28,13 @@ yarn dev
 
 #### Backend
 
-To start the backend server, run the following command. The server will be accessible at [http://localhost:8000](http://localhost:8000):
+To start the backend server, run the following command in a separate terminal instance. The server will be accessible at [http://localhost:8000](http://localhost:8000):
 
 ```bash
 yarn start-server
 ```
+
+You can create a new terminal in VSCode by clicking on the "+" icon in the terminal panel or by using the shortcut Ctrl + Shift + ` (backtick).
 
 ## Building for Production
 
