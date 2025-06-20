@@ -34,10 +34,10 @@ const calculatePriceWithDiscount = (price, discountPercentage) => {
     <v-card v-for="flower in listOfFlowers" :key="flower.name" class="mx-auto" max-width="344" variant="tonal">
       <v-img :src="flower.image" max-height="300" cover />
       <v-card-title>{{ flower.name }}</v-card-title>
-      <div v-if="hasDiscount(flower.id)">
+      <div v-if="hasDiscount(flower.product_id)">
         <v-card-subtitle class="text-decoration-line-through">Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
-        <v-card-subtitle v-if="hasDiscount(flower.id)">Price: ${{ calculatePriceWithDiscount(flower.price,
-          productsStore.getProductDiscount(flower.id)) }}</v-card-subtitle>
+        <v-card-subtitle v-if="hasDiscount(flower.product_id)">Price: ${{ calculatePriceWithDiscount(flower.price,
+          productsStore.getProductDiscount(flower.product_id)) }}</v-card-subtitle>
       </div>
       <v-card-subtitle v-else>Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
       <v-card-text max-height="300">{{ flower.description }}</v-card-text>

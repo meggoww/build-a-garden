@@ -74,7 +74,7 @@ INSERT INTO products (name, description, image, price, category) VALUES
 After pasting the code, click on the "Execute Script" button to run the query. If successful, you should see a message indicating that the command was executed successfully.
 
 It should look like this in the query tool:
-![alt text](./images/insert-items-data.png)
+![alt text](./images/insert-products-data.png)
 
 4. Confirm that the data was inserted successfully by running a simple `SELECT` query. In the query tool, type:
 
@@ -82,4 +82,4 @@ It should look like this in the query tool:
 SELECT * FROM products;
 ```
 
-![alt text](./images/select-from-items.png)
+![alt text](./images/select-from-products.png)

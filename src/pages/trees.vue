@@ -33,10 +33,10 @@ const calculatePriceWithDiscount = (price, discountPercentage) => {
     <v-card v-for="tree in listOfTrees" :key="tree.name" class="mx-auto" max-width="344" variant="tonal">
       <v-img :src="tree.image" max-height="300" cover />
       <v-card-title>{{ tree.name }}</v-card-title>
-      <div v-if="hasDiscount(tree.id)">
+      <div v-if="hasDiscount(tree.product_id)">
         <v-card-subtitle class="text-decoration-line-through">Price: ${{ tree.price.toFixed(2) }}</v-card-subtitle>
-        <v-card-subtitle v-if="hasDiscount(tree.id)">Price: ${{ calculatePriceWithDiscount(tree.price,
-          productsStore.getProductDiscount(tree.id)) }}</v-card-subtitle>
+        <v-card-subtitle v-if="hasDiscount(tree.product_id)">Price: ${{ calculatePriceWithDiscount(tree.price,
+          productsStore.getProductDiscount(tree.product_id)) }}</v-card-subtitle>
       </div>
       <v-card-subtitle v-else>Price: ${{ tree.price.toFixed(2) }}</v-card-subtitle>
       <v-card-text max-height="300">{{ tree.description }}</v-card-text>

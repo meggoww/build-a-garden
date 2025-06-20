@@ -15,12 +15,12 @@ export const useCartStore = defineStore('cart', {
   },
   actions: {
     addItem(item) {
-      const existingItem = this.items.get(item.id);
+      const existingItem = this.items.get(item.product_id);
       if(existingItem !== undefined){
         existingItem.quantity++;
       } else {
           this.items.set(
-            item.id,
+            item.product_id,
             {
               ...item,
               quantity: 1
