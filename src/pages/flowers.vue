@@ -45,7 +45,7 @@ const calculatePriceWithDiscount = (price, discountPercentage) => {
         <v-list-item class="w-100">
           <template v-slot:append>
             <div class="justify-self-end">
-              <v-btn @click="addItem(flower)" color="primary">Add</v-btn>
+              <v-btn @click="cartStore.addItem(flower)" color="primary">Add</v-btn>
             </div>
           </template>
         </v-list-item>
@@ -56,7 +56,29 @@ const calculatePriceWithDiscount = (price, discountPercentage) => {
 
 </template>
 
-<style>
+<style scoped>
+v-card {
+  background: linear-gradient(to bottom right, #eafaf1, #d4f4dd); /* light green gradient */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0, 100, 50, 0.1);
+}
+
+.v-app-bar {
+  background-color: #AEC8A4 !important; /* primary garden green */
+  color: white;
+}
+
+.v-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+h4 {
+  color: #3B3B1A; /* deep natural green */
+  font-weight: 500;
+}
 .menu {
   display: flex;
   flex-direction: row;
