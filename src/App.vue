@@ -31,5 +31,6 @@ import { useProductsStore } from '@/stores/products';
 const productsStore = useProductsStore();
 onMounted(async () => {
   await productsStore.fetchProducts();
+  await productsStore.fetchAllDiscounts();
 });
 </script>
