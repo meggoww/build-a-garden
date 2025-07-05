@@ -1,89 +1,169 @@
-<script setup>
-import { ref } from 'vue'
-import { useCartStore } from '@/stores/cart';
-import { useProductsStore } from '@/stores/products';
+  <script setup>
+  import { ref, computed } from 'vue'
+  import { useCartStore } from '@/stores/cart';
+  import { useProductsStore } from '@/stores/products';
 
-const cartStore = useCartStore()
-const productsStore = useProductsStore()
-const { addItem } = cartStore
+  const cartStore = useCartStore()
+  const productsStore = useProductsStore()
+  const { addItem } = cartStore
 
-const listOfFlowers = productsStore.getAllFlowerProducts;
+  const listOfFlowers = computed(() => productsStore.getAllFlowerProducts);
 
-const hasDiscount = (productId) => {
-  const discount = productsStore.discounts.find(discount => discount.product_id === productId);
-  return discount ? true : false;
-}
+  const hasDiscount = (productId) => {
+    return productsStore.discounts.some(d => d.product_id === productId);
+    return discount ? true : false;
+  }
+
+  /*const calculatePriceWithDiscount = (price, discountPercentage) => {
+    const discountedPrice = price - (price * (discountPercentage / 100));
+    return discountedPrice.toFixed(2);
+  }*/
+  const calculatePriceWithDiscount = (price, discountFraction) => {
+    const discountedPrice = price * (1 - discountFraction); // Use fraction directly
+    return discountedPrice.toFixed(2); // Return string, formatted nicely
+  }
 
 
-const calculatePriceWithDiscount = (price, discountPercentage) => {
-  const discountedPrice = price - (price * (discountPercentage / 100));
-  return discountedPrice.toFixed(2);
-}
+  </script>
 
-
-</script>
-
-<template>
-  <v-card>
-    <v-app-bar color="primary">
-      <v-toolbar-title>Flower Selection</v-toolbar-title>
-    </v-app-bar>
-  </v-card>
-
-  <div class="menu">
-    <v-card v-for="flower in listOfFlowers" :key="flower.name" class="mx-auto" max-width="344" variant="tonal">
-      <v-img :src="flower.image" max-height="300" cover />
-      <v-card-title>{{ flower.name }}</v-card-title>
-      <div v-if="hasDiscount(flower.product_id)">
-        <v-card-subtitle class="text-decoration-line-through">Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
-        <v-card-subtitle v-if="hasDiscount(flower.product_id)">Price: ${{ calculatePriceWithDiscount(flower.price,
-          productsStore.getProductDiscount(flower.product_id)) }}</v-card-subtitle>
-      </div>
-      <v-card-subtitle v-else>Price: ${{ flower.price.toFixed(2) }}</v-card-subtitle>
-      <v-card-text max-height="300">{{ flower.description }}</v-card-text>
-      <v-card-actions>
-        <v-list-item class="w-100">
-          <template v-slot:append>
-            <div class="justify-self-end">
-              <v-btn @click="cartStore.addItem(flower)" color="primary">Add</v-btn>
-            </div>
-          </template>
-        </v-list-item>
-      </v-card-actions>
+  <template>
+    <v-card>
+      <v-app-bar color="primary">
+        <v-toolbar-title>Flower Selection</v-toolbar-title>
+      </v-app-bar>
     </v-card>
-  </div>
+
+    <div class="menu">
+      <v-card v-for="flower in listOfFlowers" :key="flower.name" class="mx-auto" max-width="344" variant="tonal">
+        <v-img :src="flower.image" max-height="300" cover />
+        <v-card-title class="title-row">
+        <span class="product-name">{{ flower.name }}</span>
+        <span
+          v-if="hasDiscount(flower.product_id)"
+          class="discount-badge"
+        >
+          -{{ (productsStore.getProductDiscount(flower.product_id) * 100).toFixed(0) }}%
+        </span>
+        </v-card-title>
+
+        <div v-if="hasDiscount(flower.product_id)" class="price-info"> 
+        <div>
+        <div class="original-price-label">
+          <strong>Original Price:</strong>
+          <s>${{ flower.price.toFixed(2) }}</s>
+        </div>
+        <div class="discounted-price-label">
+          <strong>Discounted Price:</strong>
+          <span class="discounted-price">
+            ${{ calculatePriceWithDiscount(flower.price, productsStore.getProductDiscount(flower.product_id)) }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <v-card-subtitle v-else><strong>Price:</strong> ${{ flower.price.toFixed(2) }}</v-card-subtitle>
+        <v-card-text max-height="300">{{ flower.description }}</v-card-text>
+        <v-card-actions>
+          <v-list-item class="w-100">
+            <template v-slot:append>
+              <div class="justify-self-end">
+                <v-btn @click="cartStore.addItem({
+                        product_id: flower.product_id,
+                        name: flower.name,
+                        image: flower.image,
+                        price: flower.price
+                })"
+                color="primary">Add</v-btn>
+              </div>
+            </template>
+          </v-list-item>
+        </v-card-actions>
+      </v-card>
+    </div>
 
 
-</template>
+  </template>
 
-<style scoped>
-v-card {
-  background: linear-gradient(to bottom right, #eafaf1, #d4f4dd); /* light green gradient */
+  <style scoped>
+
+  .title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  }
+
+  .product-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #3B3B1A;
+  }
+
+  .discount-badge {
+    background-color: #C8E6C9;
+    color: #2E7D32;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 4px 8px;
+    align-items: right;
+    border-radius: 6px;
+  }
+
+  .original-price {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 14px;
+  }
+
+  .discounted-price {
+  color: #5D4037;
+  font-weight: bold;
+  margin-left: 4px;
+  }
+
+  .original-price-label s {
+  color: #999;
+  margin-left: 4px;
+  }
+
+  .price-info {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  }
+
+  .original-price-label,
+  .discounted-price-label {
+    font-size: 14px;
+  }
+
+  .v-card {
+  background: linear-gradient(to bottom right, #eafaf1, #d4f4dd);
   padding: 20px;
   border-radius: 16px;
   box-shadow: 0px 4px 20px rgba(0, 100, 50, 0.1);
-}
+  }
 
-.v-app-bar {
-  background-color: #AEC8A4 !important; /* primary garden green */
-  color: white;
-}
+  .v-app-bar {
+    background-color: #AEC8A4 !important; /* primary garden green */
+    color: white;
+  }
 
-.v-container {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  padding: 20px;
-}
+  .v-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+  }
 
-h4 {
-  color: #3B3B1A; /* deep natural green */
-  font-weight: 500;
-}
-.menu {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 50px;
-  padding: 10px;
-}
-</style>
+  h4 {
+    color: #3B3B1A; /* deep natural green */
+    font-weight: 500;
+  }
+  .menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 10px;
+  }
+  </style>

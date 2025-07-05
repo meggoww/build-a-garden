@@ -6,7 +6,7 @@ export const useProductsStore = defineStore("products", {
   state: () => ({
     products: [],
     // TODO: Replace with dynamic data from the database
-    discounts: discounts,
+    discounts: [],
   }),
   getters: {
     getAllFlowerProducts: (state) => {
@@ -22,9 +22,18 @@ export const useProductsStore = defineStore("products", {
       this.products = response.data;
     },
     // TODO: Implement fetchAllDiscounts() action
+    async fetchAllDiscounts() {
+  try {
+    const response = await axios.get("http://localhost:8000/api/discounts");
+    this.discounts = response.data;
+    } catch (error) {
+    console.error("Failed to fetch discounts:", error);
+    }
+    },
+
     getProductDiscount(productId) {
        const discount = this.discounts.find(discount => discount.product_id === productId);
-       return discount ? discount.discount_percentage : 0;
+       return discount ? discount.discount_percentage / 100 : 0;
     }
   },
 });

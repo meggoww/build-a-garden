@@ -12,11 +12,10 @@ const discounts = productsStore.discounts;
 // fetch products on mount
 onMounted(async () => {
   if (productsStore.products.length === 0) {
-    try {
-      await productsStore.fetchProducts();
-    } catch (error) {
-      console.error('Failed to fetch products:', error);
-    }
+    await productsStore.fetchProducts();
+  }
+  if (productsStore.discounts.length === 0) {
+    await productsStore.fetchAllDiscounts();
   }
 });
 
@@ -25,21 +24,23 @@ const getItemTotal = (price, quantity) => {
   return (price * quantity).toFixed(2);
 };
 const getDiscountedPrice = (productId, price) => {
-  const discount = discounts.find(d => d.product_id === productId);
-  return (discount
-    ? price - (price * discount.discount_percentage / 100)
-    : price).toFixed(2);
-};  
+  const discount = productsStore.getProductDiscount(productId);
+  return price * (1 - discount); // returns number, not string
+};
+
+const hasDiscount = (productId) => {
+  return productsStore.getProductDiscount(productId) > 0;
+};
 
 // TODO: implement getGrandTotal computed function
 const grandTotal = computed(() => {
   let total = 0;
   cartStore.items.forEach((item, productId) => {
-    const discountedPrice = getDiscountedPrice(productId, item.price);
-    total += discountedPrice * item.quantity;
+    const discounted = getDiscountedPrice(productId, item.price);
+    total += discounted * item.quantity;
   });
   return total.toFixed(2);
-  });
+});
 </script>
 
 <template>
@@ -59,8 +60,8 @@ const grandTotal = computed(() => {
 
       <!-- display all cart items -->
       <v-sheet
-  v-for="[key, item] of cartItems"
-  :key="key"
+  v-for="[productId, item] of cartItems"
+  :key="productId"
   class="cart-item-box mb-4"
   elevation="1"
 >
@@ -76,14 +77,28 @@ const grandTotal = computed(() => {
     />
   </v-col>
   <v-col class="d-flex align-center justify-center text-center">
-    <h4>${{ getDiscountedPrice(item.product_id, item.price) }}</h4>
-  </v-col>
+      <div>
+        <div v-if="hasDiscount(productId)">
+          <small class="text-grey">
+            <s>${{ item.price.toFixed(2) }}</s>
+          </small><br />
+          <span class="text-brown font-weight-bold">
+            ${{ getDiscountedPrice(productId, item.price).toFixed(2) }}
+          </span>
+        </div>
+        <div v-else>
+          ${{ item.price.toFixed(2) }}
+        </div>
+      </div>
+    </v-col>
+
   <v-col class="d-flex align-center justify-center text-center">
     <h4>{{ item.quantity }}</h4>
   </v-col>
+
   <v-col class="d-flex align-center justify-center text-center">
     <h4>
-      ${{ getItemTotal(getDiscountedPrice(item.product_id, item.price), item.quantity) }}
+      ${{ (getDiscountedPrice(productId, item.price) * item.quantity).toFixed(2) }}
     </h4>
   </v-col>
   <v-col class="d-flex align-center justify-center">

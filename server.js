@@ -27,6 +27,18 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
+// Discounts route (Milestone 2)
+app.get('/api/discounts', async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    try {
+        const result = await pool.query('SELECT * FROM discounts');
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.error('Error querying discounts:', err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
 
 // Start the server
 app.listen(PORT, () => {
