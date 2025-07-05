@@ -29,5 +29,8 @@ export const useCartStore = defineStore('cart', {
       }
 
     },
+    removeItem(productId) {
+  this.items.delete(productId);
+    },
   },
 });

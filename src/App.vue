@@ -2,7 +2,12 @@
   <v-app>
     <v-navigation-drawer expand-on-hover rail>
       <v-list>
-        <v-list-item prepend-icon="mdi-cart" subtitle="View items" title="My Cart"></v-list-item>
+        <v-list-item
+          to="/cart"
+          prepend-icon="mdi-cart"
+          subtitle="View items"
+          title="My Cart"
+        ></v-list-item>
       </v-list>
       <v-divider></v-divider>
       <v-list density="compact" nav>
@@ -24,9 +29,8 @@
 </template>
 
 <script setup>
-
-import { onMounted } from 'vue';
-import { useProductsStore } from '@/stores/products';
+import { onMounted } from "vue";
+import { useProductsStore } from "@/stores/products";
 
 const productsStore = useProductsStore();
 onMounted(async () => {
